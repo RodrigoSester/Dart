@@ -1,33 +1,40 @@
+import 'classes/index.dart';
+import 'dart:io';
+
 void main() {
   // Mercado
-}
+  String? capacity;
+  String? insert;
 
-class Product {
-  String name;
-  double price;
-  int quantity;
-  bool? isAvailable;
-
-  Product(this.name,
-      {required this.price, required this.quantity, this.isAvailable = true});
-
-  Product.named(
-      {required this.name, required this.price, required this.quantity, this.isAvailable});
-}
-
-class Stock {
-  List<Product>? products;
-  int totalCapacity;
-  bool? isFull;
-
-  Stock(this.totalCapacity, {this.isFull, this.products}); // argumentos opcionais devem ser os últimos
-
-  push(List<Product> products) {
-    for (var product in products) {
-      this.products!.add(product);
+  do {
+    capacity = insertValue('Qual a capacidade do seu estoque?');
+    if (int.parse(capacity!) < 0 || capacity == '') {
+      print('Insira um valor válido!');
     }
-  }
-  delete(Product product) {
-    products!.removeWhere((element) => element.name == product.name);
-  }
+  } while (int.parse(capacity) < 0 || capacity == '');
+
+  Stock stock = Stock(int.parse(capacity));
+
+  do {
+    String? name = insertValue('Qual o nome do produto que deseja cadastrar?');
+    String? price = insertValue('Qual o valor do produto?');
+    String? quantity = insertValue('Qual a quantidade deste produto?');
+
+    Product product = Product.named(
+        name: name!,
+        price: double.parse(price!),
+        quantity: int.parse(quantity!));
+
+    print(product.toString());
+    stock.push(product);
+
+    insert = insertValue('Deseja cadastrar mais algum produto?');
+  } while (insert == 'y');
+
+  print(stock.toString());
+}
+
+String? insertValue(String message) {
+  print(message);
+  return stdin.readLineSync();
 }
