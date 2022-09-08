@@ -1,15 +1,20 @@
 import 'classes/index.dart';
 import 'dart:io';
 
+import 'error/ErrorMessage.dart';
+
 void main() {
   // Mercado
   String? capacity;
   String? insert;
 
+  ErrorMessage error;
+
   do {
     capacity = insertValue('Qual a capacidade do seu estoque?');
     if (int.parse(capacity!) < 0 || capacity == '') {
-      print('Insira um valor válido!');
+      error = ErrorMessage('O seu estoque deve ter uma capacidade maior que 0', 101);
+      print(error.toString());
     }
   } while (int.parse(capacity) < 0 || capacity == '');
 
@@ -28,7 +33,7 @@ void main() {
     print(product.toString());
     stock.push(product);
 
-    insert = insertValue('Deseja cadastrar mais algum produto?');
+    insert = insertValue('Deseja cadastrar mais algum produto? y/n');
   } while (insert == 'y');
 
   print(stock.toString());
