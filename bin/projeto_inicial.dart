@@ -1,7 +1,12 @@
+/// Classes
 import 'classes/index.dart';
+
+/// Errors
+import 'error/index.dart';
+
+/// Libraries
 import 'dart:io';
 
-import 'error/ErrorMessage.dart';
 
 void main() {
   // Mercado

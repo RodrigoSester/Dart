@@ -1,3 +1,3 @@
-export 'Product.dart' show Product;
-export 'Stock.dart' show Stock;
+export 'product.dart' show Product;
+export 'stock.dart' show Stock;
 
